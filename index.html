@@ -7,10 +7,78 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
     <link rel="stylesheet" href="main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <title>Scuba Quiz</title>
 </head>
 <body>
-    
+
+    <header class="header">
+        <h1>Random Scuba Knowledge Quiz</h1>
+    </header>
+
+    <main>
+        <section class="quizStart">
+            <h2>Scuba Diving</h2>
+            <p>A quiz of random questions related to scuba diving.</p>
+            <button type="button">Dive in!</button>
+            <br>
+            <br>
+            <br>
+        </section>
+
+        <section class="quizQuestion">
+            <p>Question x of x</p>
+            <br>
+            <form class="js-question">
+                <fieldset>
+                    <legend>What does SCUBA stand for?</legend>
+
+                    <input type="radio" name="answer" id="answer1" required>
+                    <label for="answer1">Super Charged Underwater Breathing Activity</label>
+                    <br>
+                    <input type="radio" name="answer" id="answer2" required>
+                    <label for="answer2">Self Contained Underwater Breathing Apparatus</label>
+                    <br>
+                    <input type="radio" name="answer" id="answer3" required>
+                    <label for="answer3">Slick Cannister Ultimate Bridge Ache</label>
+                    <br>
+                    <input type="radio" name="answer" id="answer4" required>
+                    <label for="answer4">Superb Challenge Underwater Bubble Actuator</label>
+                    <br>
+                    <br>
+                    <p>pic of something scuba</p>
+                    <br>
+                    <br>
+                    <button type="submit">Submit</button>
+                    <br>
+                    <br>
+                    <br>
+                </fieldset>
+            </form>
+        </section>
+
+        <section class="quizAnswer">
+            <h2>That is correct! -or- That is incorrect.</h2>
+            <p>sweet positive picture -or- picture full of bubbles</p>
+            <p>Good work! -or- The correct answer is: blah blah blah</p>
+            <br>
+            <p>score: 0</p>
+            <br>
+            <button type="button">Next</button>
+            <br>
+            <br>
+            <br>
+        </section>
+
+        <section class="quizEnd">
+            <h2>Your final score was x.</h2>
+            <p>sweet pic of a manta ray -or- pic of a parrot fish -or- pic of blank sand on sea bottom</p>
+            <p>You must be a master of diving -or- keep studying so that you can go deeper -or- you should probably stay on land</p>
+            <br>
+            <button type="button">Restart</button>
+        </section>
+
+
+
+    </main>
 </body>
 </html>

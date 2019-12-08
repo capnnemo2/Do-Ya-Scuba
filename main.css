@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    
+}
+
+h1 {
+    font-size: 3em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+p {
+    font-size: 1em;
+}
+
+fieldset {
+    font-size: 1em;
+}
+
+.header {
+    padding: 20px;
+    text-align: center;
+}
+
+.quizStart {
+    border: 1px solid black;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.quizQuestion {
+    border: 1px solid black;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.quizAnswer {
+    border: 1px solid black;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.quizEnd {
+    border: 1px solid black;
+    margin-bottom: 20px;
+    padding: 10px;
+}
