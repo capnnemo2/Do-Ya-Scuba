@@ -1,5 +1,5 @@
 // Questions array
-const STORE = {
+const STORE = [
     // question 1
     {
         question: 'What does SCUBA stand for?',
@@ -48,7 +48,7 @@ const STORE = {
     },
     // question 6
     {
-        question: 'What is the definition of "enriched air nitrox" (EANx)?'
+        question: 'What is the definition of "enriched air nitrox" (EANx)?',
         options: ['Any nitrox mix with more than 49% nitrogen',
         'Any nitrox mix with more than 21% oxygen',
         '100% oxygen',
@@ -64,12 +64,71 @@ const STORE = {
         'All of the above!'],
         answer: 'All of the above!'
     }
-}
+];
 
 // variable to store question number and score
 let questionNumber = 0;
 let score = 0;
 
-function handleQuiz() {
-    
+// this function will begin the quiz
+function beginQuiz() {
+    console.log(`ran beginQuiz`);
+    $('#begin').on('click', function(e) {
+        askQuestion();
+    });
 }
+
+// this function will ask a question and provide answer options
+function askQuestion() {
+    console.log(`ran askQuestion`);
+    questionNumber();
+
+}
+
+// this function will check the user answer against the true answer and provide feeback
+function checkAnswer() {
+
+}
+
+// this function will run if the user answered correctly
+function answerCorrect() {
+    console.log(`ran answerCorrect`);
+    // blah blah blah
+    addAPoint();
+}
+
+// this function will run if the user answered incorrectly
+function answerIncorrect() {
+
+}
+
+// this function will provide user with final score, clever message, and the option to restart
+function finishQuiz() {
+
+}
+
+// this function will execute restarting the quiz, including resetting the score and question #
+function restartQuiz() {
+    questionNumber = 0;
+    score = 0;
+}
+
+// this function will add a point to the user score
+function addAPoint() {
+    console.log(`ran addAPoint`);
+}
+
+// this function will keep track of the question #
+function questionNumber() {
+    console.log(`ran questionNumber`);
+
+}
+
+
+// this is the callback fn. It will begin the quiz (ask a question), provide answer feedback (right vs wrong), ask another question ...etc, provide overall score with option to restart
+function handleQuiz() {
+    console.log(`ran handleQuiz`);
+    beginQuiz();
+}
+
+$(handleQuiz);
