@@ -66,7 +66,7 @@ const STORE = [
     }
 ];
 
-// variable to store question number and score
+// variables to store question number and score
 let questionNumber = 0;
 let score = 0;
 
@@ -81,13 +81,15 @@ function beginQuiz() {
 // this function will ask a question and provide answer options
 function askQuestion() {
     console.log(`ran askQuestion`);
-    questionNumber();
+    questionAddANumber();
 
 }
 
 // this function will check the user answer against the true answer and provide feeback
 function checkAnswer() {
-
+    console.log(`ran checkAnswer`);
+    answerCorrect();
+    answerIncorrect();
 }
 
 // this function will run if the user answered correctly
@@ -95,32 +97,40 @@ function answerCorrect() {
     console.log(`ran answerCorrect`);
     // blah blah blah
     addAPoint();
+    askQuestion();
+    finishQuiz();
 }
 
 // this function will run if the user answered incorrectly
 function answerIncorrect() {
-
+    console.log(`ran answerIncorrect`);
+    askQuestion();
+    finishQuiz();
 }
 
 // this function will provide user with final score, clever message, and the option to restart
 function finishQuiz() {
-
+    console.log(`ran finishQuiz`);
+    restartQuiz();
 }
 
 // this function will execute restarting the quiz, including resetting the score and question #
 function restartQuiz() {
     questionNumber = 0;
     score = 0;
+    askQuestion();
 }
 
 // this function will add a point to the user score
 function addAPoint() {
     console.log(`ran addAPoint`);
+    score += 1;
 }
 
 // this function will keep track of the question #
-function questionNumber() {
+function questionAddANumber() {
     console.log(`ran questionNumber`);
+    questionNumber += 1;
 
 }
 
@@ -129,6 +139,9 @@ function questionNumber() {
 function handleQuiz() {
     console.log(`ran handleQuiz`);
     beginQuiz();
+    askQuestion();
+    checkAnswer();
+
 }
 
 $(handleQuiz);
