@@ -2,10 +2,6 @@
     box-sizing: border-box;
 }
 
-body {
-    
-}
-
 main {
     display: flex;
     justify-content: center;
@@ -29,6 +25,7 @@ fieldset {
     padding: 15px;
     text-align: left;
 }
+
 
 .header {
     padding: 20px;
