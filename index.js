@@ -70,37 +70,43 @@ const STORE = [
 let questionNumber = 0;
 let score = 0;
 
+
 // this function will begin the quiz
 function beginQuiz() {
     console.log(`ran beginQuiz`);
     $('.question').hide();
+    $('.answer').hide();
     $('.welcome').on('click', '#begin', function(e) {
         $('.welcome').hide();
         askQuestion();
+        
     });
-    event.stopPropagation();
+    
+    
 }
 
 // will generate question form with options and submit button. will display questionNumber and score
 function questionGenerator(questionId) {
     let questionScore = $(`<ul class="nav"><li>Question: ${questionNumber} / 7</li><li>Score: ${score}</li></ul>`)
+
+    // there should be a way to use a loop to create the following, but it works, so leave it for now
     let questionForm = $(`<form id="question-form"><fieldset><legend>${STORE[questionId].question}</legend>
     <input type="radio" name="answer" id="answer1" required><label for="answer1">${STORE[questionId].options[0]}</label><br>
     <input type="radio" name="answer" id="answer2" required><label for="answer1">${STORE[questionId].options[1]}</label><br>
     <input type="radio" name="answer" id="answer3" required><label for="answer1">${STORE[questionId].options[2]}</label><br>
     <input type="radio" name="answer" id="answer4" required><label for="answer1">${STORE[questionId].options[3]}</label><br>
-    <button type="submit" id="submitAnswer">Submit</button>
+    <button type="button" id="submit-button">Submit</button>
     </fieldset></form>`);
     
     $(questionForm).appendTo(questionScore);
     
-    return questionScore;
+    return $('.question').html(questionScore);
 };
 
 // if there are questions remaining, will ask question. otherwise will jump to finishQuiz
 function generateQuestion() {
-    if ((questionNumber - 1)< STORE.length) {
-        return questionGenerator((questionNumber - 1));
+    if (questionNumber < STORE.length) {
+        return questionGenerator(questionNumber);
     } else {
         $('.question').hide();
         $('.answer').show();
@@ -111,26 +117,25 @@ function generateQuestion() {
 // this function will ask a question and provide answer options
 function askQuestion() {
     console.log(`ran askQuestion`);
-    questionAddANumber();
     $('.question').show();
     $('.question').prepend(generateQuestion());
-    // event.stopPropagation();
-
-
 }
 
 // this function will check the user answer against the true answer and provide feeback
+// don't know why checkAnswer can't find user input answer
 function checkAnswer() {
-    console.log(`ran checkAnswer`);
-    $('#question-form').on('submit', function(event) {
-        event.preventDefault();
-        let selectedOption = $('input[name="answer":checked]');
-        let trialAnswer = selectedOption.val();
+    $('.main-container').on('click', '#submit-button', function(event) {
+        $('.question').hide();
+        $('.answer').show();
+        console.log(`ran checkAnswer`);
+        let selectedOption = $('input[name=answer]:checked');
+        let userAnswer = $(selectedOption).val();
+        console.log(userAnswer);
         let correctAnswer = STORE[questionNumber].answer;
-        if (selectedOption === correctAnswer) {
-            return answerCorrect();
+        if (userAnswer === correctAnswer) {
+            answerCorrect();
         } else {
-            return answerIncorrect();
+            answerIncorrect();
         }
         
     });
@@ -139,21 +144,29 @@ function checkAnswer() {
 // this function will run if the user answered correctly
 function answerCorrect() {
     console.log(`ran answerCorrect`);
-    // blah blah blah
-    $('.question').hide();
-    $('.answer').show();
+    $('.answer').html(`<h3>Your answer is correct!</h3>
+    <img>
+    <button type="button" id="next-button">Next</button>`);
+    
     addAPoint();
-    askQuestion();
-    finishQuiz();
 }
 
 // this function will run if the user answered incorrectly
 function answerIncorrect() {
     console.log(`ran answerIncorrect`);
-    $('.question').hide();
-    $('.answer').show();
-    askQuestion();
-    finishQuiz();
+    $('.answer').html(`<h3>Your answer is incorrect.</h3>
+    <img>
+    <p>The correct answer is: ${STORE[questionNumber].answer}</p>
+    <button type="button" id="next-button">Next</button>`);
+}
+
+// this function will run after user gets answerCorrect or answerIncorrect and pushes #next-button
+function nextQuestion() {
+    $('.main-container').on('click', '#next-button', function(event) {
+        $('.answer').hide();
+        $('.question').show();
+        console.log(`ran nextQuestion`);
+    })
 }
 
 // this function will provide user with final score, clever message, and the option to restart
@@ -187,7 +200,6 @@ function questionAddANumber() {
 function handleQuiz() {
     console.log(`ran handleQuiz`);
     beginQuiz();
-    askQuestion();
     checkAnswer();
 
 }
