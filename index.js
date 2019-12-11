@@ -73,15 +73,49 @@ let score = 0;
 // this function will begin the quiz
 function beginQuiz() {
     console.log(`ran beginQuiz`);
-    $('#begin').on('click', function(e) {
+    $('.question').hide();
+    $('.welcome').on('click', '#begin', function(e) {
+        $('.welcome').hide();
         askQuestion();
     });
+    event.stopPropagation();
+}
+
+// will generate question form with options and submit button. will display questionNumber and score
+function questionGenerator(questionId) {
+    let questionScore = $(`<ul class="nav"><li>Question: ${questionNumber} / 7</li><li>Score: ${score}</li></ul>`)
+    let questionForm = $(`<form><fieldset><legend>${STORE[questionId].question}</legend>
+    <input type="radio" name="answer" id="answer1" required><label for="answer1">${STORE[questionId].options[0]}</label><br>
+    <input type="radio" name="answer" id="answer2" required><label for="answer1">${STORE[questionId].options[1]}</label><br>
+    <input type="radio" name="answer" id="answer3" required><label for="answer1">${STORE[questionId].options[2]}</label><br>
+    <input type="radio" name="answer" id="answer4" required><label for="answer1">${STORE[questionId].options[3]}</label><br>
+    <button type="button">Submit</button>
+    </fieldset></form>`);
+    
+    $(questionForm).appendTo(questionScore);
+    
+    return questionScore;
+};
+
+// if there are questions remaining, will ask question. otherwise will jump to finishQuiz
+function generateQuestion() {
+    if ((questionNumber - 1)< STORE.length) {
+        return questionGenerator((questionNumber - 1));
+    } else {
+        $('.question').hide();
+        $('.answer').show();
+        finishQuiz();
+    }
 }
 
 // this function will ask a question and provide answer options
 function askQuestion() {
     console.log(`ran askQuestion`);
     questionAddANumber();
+    $('.question').show();
+    $('.question').prepend(generateQuestion());
+    event.stopPropagation();
+    
 
 }
 
