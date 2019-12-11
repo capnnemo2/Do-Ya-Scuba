@@ -84,12 +84,12 @@ function beginQuiz() {
 // will generate question form with options and submit button. will display questionNumber and score
 function questionGenerator(questionId) {
     let questionScore = $(`<ul class="nav"><li>Question: ${questionNumber} / 7</li><li>Score: ${score}</li></ul>`)
-    let questionForm = $(`<form><fieldset><legend>${STORE[questionId].question}</legend>
+    let questionForm = $(`<form id="question-form"><fieldset><legend>${STORE[questionId].question}</legend>
     <input type="radio" name="answer" id="answer1" required><label for="answer1">${STORE[questionId].options[0]}</label><br>
     <input type="radio" name="answer" id="answer2" required><label for="answer1">${STORE[questionId].options[1]}</label><br>
     <input type="radio" name="answer" id="answer3" required><label for="answer1">${STORE[questionId].options[2]}</label><br>
     <input type="radio" name="answer" id="answer4" required><label for="answer1">${STORE[questionId].options[3]}</label><br>
-    <button type="button">Submit</button>
+    <button type="submit" id="submitAnswer">Submit</button>
     </fieldset></form>`);
     
     $(questionForm).appendTo(questionScore);
@@ -114,22 +114,34 @@ function askQuestion() {
     questionAddANumber();
     $('.question').show();
     $('.question').prepend(generateQuestion());
-    event.stopPropagation();
-    
+    // event.stopPropagation();
+
 
 }
 
 // this function will check the user answer against the true answer and provide feeback
 function checkAnswer() {
     console.log(`ran checkAnswer`);
-    answerCorrect();
-    answerIncorrect();
+    $('#question-form').on('submit', function(event) {
+        event.preventDefault();
+        let selectedOption = $('input[name="answer":checked]');
+        let trialAnswer = selectedOption.val();
+        let correctAnswer = STORE[questionNumber].answer;
+        if (selectedOption === correctAnswer) {
+            return answerCorrect();
+        } else {
+            return answerIncorrect();
+        }
+        
+    });
 }
 
 // this function will run if the user answered correctly
 function answerCorrect() {
     console.log(`ran answerCorrect`);
     // blah blah blah
+    $('.question').hide();
+    $('.answer').show();
     addAPoint();
     askQuestion();
     finishQuiz();
@@ -138,6 +150,8 @@ function answerCorrect() {
 // this function will run if the user answered incorrectly
 function answerIncorrect() {
     console.log(`ran answerIncorrect`);
+    $('.question').hide();
+    $('.answer').show();
     askQuestion();
     finishQuiz();
 }
