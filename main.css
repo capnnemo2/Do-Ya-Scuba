@@ -62,25 +62,11 @@ fieldset > legend {
     padding: 20px;
 }
 
-.pic-box {
-    border: 1px solid black;
-    height: 200px;
-    width: 80%;
-    margin: 10px auto;
-    background:
-      linear-gradient(to top right,
-         transparent calc(50% - 1px), gray calc(50% - 1px),
-         gray calc(50% + 1px), transparent calc(50% + 1px)),
-      linear-gradient(to bottom right,
-         transparent calc(50% - 1px), gray calc(50% - 1px),
-         gray calc(50% + 1px), transparent calc(50% + 1px));
-}
-
 .main-container {
     display: flex;
     width: 80%;
     justify-content: center;
-    position: fixed;
+    position: absolute;
     top: 200px;
     left: 100px;
     background-color: ;
