@@ -158,7 +158,6 @@ function answerCorrect() {
     $('.answer').html(`<h3>Your answer is correct!</h3>
     <img>
     <button type="button" id="next-button">Next</button>`);
-    
     addAPoint();
 }
 

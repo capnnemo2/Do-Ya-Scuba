@@ -13,6 +13,7 @@ h1 {
 
 h2 {
     font-size: 1.5em;
+    text-transform: uppercase;
 }
 
 p {
@@ -24,6 +25,7 @@ fieldset {
     border: 1px solid black;
     padding: 15px;
     text-align: left;
+    border-radius: 10px;
 }
 
 
@@ -34,61 +36,11 @@ fieldset {
 
 .nav {
     text-align: center;
-    margin-top: 50px;
 }
 
 .nav li {
-    /* border: 1px dotted black; */
     display: inline-block;
     padding: 20px;
-    margin-bottom: 30px;
-}
-
-.quizStart {
-    border: 1px solid black;
-    margin: 100px auto;
-    padding: 10px;
-    width: 60%;
-    text-align: center;
-}
-
-.quizQuestion {
-    border: 1px solid black;
-    margin: 100px auto;
-    padding: 10px;
-    width: 60%;
-    align-self: center;
-}
-
-.move-right {
-    margin-left: 10%;
-}
-
-.question{
-    margin-bottom: 15px;
-}
-
-.center-button {
-    text-align: center;
-}
-
-.quizAnswer {
-    border: 1px solid black;
-    margin: 200px auto;
-    padding: 10px;
-    width: 60%;
-    align-self: center;
-    text-align: center;
-}
-
-.score-box {
-    padding: 15px;
-}
-
-.quizEnd {
-    border: 1px solid black;
-    margin-bottom: 20px;
-    padding: 10px;
 }
 
 .pic-box {
@@ -103,4 +55,25 @@ fieldset {
       linear-gradient(to bottom right,
          transparent calc(50% - 1px), gray calc(50% - 1px),
          gray calc(50% + 1px), transparent calc(50% + 1px));
+}
+
+.main-container {
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    position: fixed;
+    top: 200px;
+    left: 100px;
+    
+}
+
+#begin,
+#submit-button,
+#next-button,
+#restart-button {
+    background-color: teal;
+    padding: 15px 35px 15px 35px;
+    border-radius: 10px;
+    margin-top: 20px;
+    color: white;
 }
