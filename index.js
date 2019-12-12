@@ -74,8 +74,12 @@ let score = 0;
 // this function will begin the quiz
 function beginQuiz() {
     console.log(`ran beginQuiz`);
+    questionNumber = 0;
+    score = 0;
     $('.question').hide();
     $('.answer').hide();
+    $('.final').hide();
+    $('.welcome').show();
     $('.welcome').on('click', '#begin', function(e) {
         $('.welcome').hide();
         askQuestion();
@@ -87,15 +91,23 @@ function beginQuiz() {
 
 // will generate question form with options and submit button. will display questionNumber and score
 function questionGenerator(questionId) {
-    let questionScore = $(`<ul class="nav"><li>Question: ${questionNumber} / 7</li><li>Score: ${score}</li></ul>`)
+    let questionScore = $(`<ul class="nav"><li>Question: ${questionNumber + 1} / 7</li><li>Score: ${score}</li></ul>`)
 
     // there should be a way to use a loop to create the following, but it works, so leave it for now
     let questionForm = $(`<form id="question-form"><fieldset><legend>${STORE[questionId].question}</legend>
-    <input type="radio" name="answer" id="answer1" required><label for="answer1">${STORE[questionId].options[0]}</label><br>
-    <input type="radio" name="answer" id="answer2" required><label for="answer1">${STORE[questionId].options[1]}</label><br>
-    <input type="radio" name="answer" id="answer3" required><label for="answer1">${STORE[questionId].options[2]}</label><br>
-    <input type="radio" name="answer" id="answer4" required><label for="answer1">${STORE[questionId].options[3]}</label><br>
-    <button type="button" id="submit-button">Submit</button>
+    <input type="radio" name="answer" id="answer1" required>
+    <label for="answer1">${STORE[questionId].options[0]}</label>
+    <br>
+    <input type="radio" name="answer" id="answer2" required>
+    <label for="answer2">${STORE[questionId].options[1]}</label>
+    <br>
+    <input type="radio" name="answer" id="answer3" required>
+    <label for="answer3">${STORE[questionId].options[2]}</label>
+    <br>
+    <input type="radio" name="answer" id="answer4" required>
+    <label for="answer4">${STORE[questionId].options[3]}</label>
+    <br>
+    <button type="submit" id="submit-button">Submit</button>
     </fieldset></form>`);
     
     $(questionForm).appendTo(questionScore);
@@ -124,15 +136,14 @@ function askQuestion() {
 // this function will check the user answer against the true answer and provide feeback
 // don't know why checkAnswer can't find user input answer
 function checkAnswer() {
-    $('.main-container').on('click', '#submit-button', function(event) {
+    $('.main-container').on('submit', function(event) {
+        event.preventDefault();
         $('.question').hide();
         $('.answer').show();
         console.log(`ran checkAnswer`);
-        let selectedOption = $('input[name=answer]:checked');
-        let userAnswer = $(selectedOption).val();
-        console.log(userAnswer);
+        let selectedOption = $(`label[for=${$("input[name=answer]:checked").attr("id")}]`).html();
         let correctAnswer = STORE[questionNumber].answer;
-        if (userAnswer === correctAnswer) {
+        if (selectedOption === correctAnswer) {
             answerCorrect();
         } else {
             answerIncorrect();
@@ -166,20 +177,25 @@ function nextQuestion() {
         $('.answer').hide();
         $('.question').show();
         console.log(`ran nextQuestion`);
+        questionAddANumber();
+        $('.question').replaceWith(generateQuestion);
     })
 }
 
 // this function will provide user with final score, clever message, and the option to restart
 function finishQuiz() {
     console.log(`ran finishQuiz`);
-    restartQuiz();
+    $('.question').hide();
+    $('.answer').hide();
+    $('.final').show();
+    $('.final').html(`<h3>You scored ${score} out of 7.</h3><p>Would you like to try again?</p><button type="button" id="restart-button">Restart</button>`);
 }
 
 // this function will execute restarting the quiz, including resetting the score and question #
 function restartQuiz() {
-    questionNumber = 0;
-    score = 0;
-    askQuestion();
+    $('.main-container').on('click', '#restart-button', function(e) {
+        beginQuiz();
+    })
 }
 
 // this function will add a point to the user score
@@ -190,7 +206,7 @@ function addAPoint() {
 
 // this function will keep track of the question #
 function questionAddANumber() {
-    console.log(`ran questionNumber`);
+    console.log(`ran questionAddANumber`);
     questionNumber += 1;
 
 }
@@ -201,6 +217,9 @@ function handleQuiz() {
     console.log(`ran handleQuiz`);
     beginQuiz();
     checkAnswer();
+    nextQuestion();
+    restartQuiz();
+
 
 }
 
