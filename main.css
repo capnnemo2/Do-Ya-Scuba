@@ -64,12 +64,9 @@ fieldset > legend {
 
 .main-container {
     display: flex;
+    margin-top: 50px;
     width: 80%;
     justify-content: center;
-    position: absolute;
-    top: 200px;
-    left: 100px;
-    background-color: ;
     color: white;
     background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9));
     border-radius: 25px;
