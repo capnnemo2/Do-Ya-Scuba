@@ -70,12 +70,11 @@ const STORE = [
 let questionNumber = 0;
 let score = 0;
 
-
 // this function will begin the quiz
 function beginQuiz() {
     console.log(`ran beginQuiz`);
-    questionNumber = 0;
-    score = 0;
+    // questionNumber = 0;
+    // score = 0;
     $('.question').hide();
     $('.answer').hide();
     $('.final').hide();
@@ -83,17 +82,14 @@ function beginQuiz() {
     $('.welcome').on('click', '#begin', function(e) {
         $('.welcome').hide();
         askQuestion();
-        
     });
-    
-    
 }
 
 // will generate question form with options and submit button. will display questionNumber and score
 function questionGenerator(questionId) {
     let questionScore = $(`<ul class="nav"><li>Question: ${questionNumber + 1} / 7</li><li>Score: ${score}</li></ul>`)
 
-    // there should be a way to use a loop to create the following, but it works, so leave it for now
+    // there should be a way to use a loop to create the following, but it works, so leave it for now. if I store value="${STORE[questionId].options[i]" for each input then can retrieve value for checkAnswer rather than searching for the html in the label: $(input:checked).val();
     let questionForm = $(`<form id="question-form"><fieldset><legend>${STORE[questionId].question}</legend>
     <input type="radio" name="answer" id="answer1" required>
     <label for="answer1">${STORE[questionId].options[0]}</label>
@@ -109,21 +105,13 @@ function questionGenerator(questionId) {
     <br>
     <button type="submit" id="submit-button">Submit</button>
     </fieldset></form>`);
-    
     $(questionForm).appendTo(questionScore);
-    
     return $('.question').html(questionScore);
 };
 
 // if there are questions remaining, will ask question. otherwise will jump to finishQuiz
 function generateQuestion() {
-    if (questionNumber < STORE.length) {
-        return questionGenerator(questionNumber);
-    } else {
-        $('.question').hide();
-        $('.answer').show();
-        finishQuiz();
-    }
+    return questionGenerator(questionNumber);
 }
 
 // this function will ask a question and provide answer options
@@ -148,14 +136,13 @@ function checkAnswer() {
         } else {
             answerIncorrect();
         }
-        
     });
 }
 
 // this function will run if the user answered correctly
 function answerCorrect() {
     console.log(`ran answerCorrect`);
-    $('.answer').html(`<h3>Your answer is correct!</h3>
+    $('.answer').html(`<h2>Your answer is correct!</h2>
     <img>
     <button type="button" id="next-button">Next</button>`);
     addAPoint();
@@ -164,7 +151,7 @@ function answerCorrect() {
 // this function will run if the user answered incorrectly
 function answerIncorrect() {
     console.log(`ran answerIncorrect`);
-    $('.answer').html(`<h3>Your answer is incorrect.</h3>
+    $('.answer').html(`<h2>Your answer is incorrect.</h2>
     <img>
     <p>The correct answer is: ${STORE[questionNumber].answer}</p>
     <button type="button" id="next-button">Next</button>`);
@@ -177,24 +164,32 @@ function nextQuestion() {
         $('.question').show();
         console.log(`ran nextQuestion`);
         questionAddANumber();
-        $('.question').replaceWith(generateQuestion);
+        if (questionNumber < STORE.length) {
+            $('.question').replaceWith(generateQuestion);
+        } else {
+            $('.question').hide();
+            $('.answer').show();
+            finishQuiz();
+        }
     })
 }
 
-// this function will provide user with final score, clever message, and the option to restart
+// this function will provide user with final score and the option to restart
 function finishQuiz() {
     console.log(`ran finishQuiz`);
     $('.question').hide();
     $('.answer').hide();
     $('.final').show();
-    $('.final').html(`<h3>You scored ${score} out of 7.</h3><p>Would you like to try again?</p><button type="button" id="restart-button">Restart</button>`);
+    $('.final').html(`<h2>You scored ${score} out of 7.</h2><br><p>Would you like to try again?</p><button type="button" id="restart-button">Restart</button>`);
 }
 
 // this function will execute restarting the quiz, including resetting the score and question #
 function restartQuiz() {
     $('.main-container').on('click', '#restart-button', function(e) {
+        questionNumber = 0;
+        score = 0;
         beginQuiz();
-    })
+    });
 }
 
 // this function will add a point to the user score
@@ -210,16 +205,13 @@ function questionAddANumber() {
 
 }
 
-
-// this is the callback fn. It will begin the quiz (ask a question), provide answer feedback (right vs wrong), ask another question ...etc, provide overall score with option to restart
+// this is where the magic happens
 function handleQuiz() {
     console.log(`ran handleQuiz`);
     beginQuiz();
     checkAnswer();
     nextQuestion();
     restartQuiz();
-
-
 }
 
 $(handleQuiz);

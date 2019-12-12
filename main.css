@@ -7,17 +7,30 @@ main {
     justify-content: center;
 }
 
+body {
+    background-image: url("imgs/background.jpg");
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+
 h1 {
     font-size: 3em;
+    color: white;
 }
 
 h2 {
     font-size: 1.5em;
-    text-transform: uppercase;
+    margin-top: 25px;
 }
 
 p {
     font-size: 1em;
+}
+
+.title {
+    text-transform: uppercase;
+    padding-bottom: 15px;
+    margin-top: 25px;
 }
 
 fieldset {
@@ -28,10 +41,16 @@ fieldset {
     border-radius: 10px;
 }
 
+fieldset > legend {
+    font-size: 1.3em;
+}
+
 
 .header {
     padding: 20px;
     text-align: center;
+    background-color:;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9));
 }
 
 .nav {
@@ -64,7 +83,10 @@ fieldset {
     position: fixed;
     top: 200px;
     left: 100px;
-    
+    background-color: ;
+    color: white;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9));
+    border-radius: 25px;
 }
 
 #begin,
@@ -76,4 +98,21 @@ fieldset {
     border-radius: 10px;
     margin-top: 20px;
     color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: .2s;
+    margin-bottom: 25px;
 }
+
+#begin:hover:enabled,
+#begin:focus:enabled,
+#submit-button:hover:enabled,
+#submit-button:focus:enabled,
+#next-button:hover:enabled,
+#next-button:focus:enabled,
+#restart-button:hover:enabled,
+#restart-button:focus:enabled {
+    background-color: rgb(9, 94, 94);
+    
+}
+
