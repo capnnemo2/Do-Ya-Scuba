@@ -5,10 +5,10 @@ const STORE = [
         question: 'What does SCUBA stand for?',
         options: ['Superbly Challenging Underwater Bubble Actuator',
         'Sea Cell Ultimate Breathing Appliance',
-        'Self Contained Breathing Apparatus',
+        'Self Contained Underwater Breathing Apparatus',
         'Super Charged Ultimate Breathing Apparatus'
         ],
-        answer: 'Self Contained Breathing Apparatus'
+        answer: 'Self Contained Underwater Breathing Apparatus'
     },
     // question 2
     {
