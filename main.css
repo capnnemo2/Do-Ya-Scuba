@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+}
+
 main {
     display: flex;
     justify-content: center;
@@ -9,8 +13,9 @@ main {
 
 body {
     background-image: url("imgs/background.jpg");
-    background-size: auto;
+    background-size: cover;
     background-repeat: no-repeat;
+    min-height: 100%;
 }
 
 h1 {
@@ -82,7 +87,7 @@ fieldset > legend {
     font-size: 1em;
     cursor: pointer;
     transition: .2s;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 #begin:hover:enabled,

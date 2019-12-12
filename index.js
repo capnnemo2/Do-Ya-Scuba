@@ -142,19 +142,21 @@ function checkAnswer() {
 // this function will run if the user answered correctly
 function answerCorrect() {
     console.log(`ran answerCorrect`);
-    $('.answer').html(`<h2>Your answer is correct!</h2>
-    <img>
-    <button type="button" id="next-button">Next</button>`);
     addAPoint();
+    let questionScore = $(`<ul class="nav"><li>Question: ${questionNumber + 1} / 7</li><li>Score: ${score}</li></ul>`);
+    $('.answer').html(`<h2>Your answer is correct!</h2>
+    <button type="button" id="next-button">Next</button>`);
+    $('.answer').prepend(questionScore);
+    
 }
 
 // this function will run if the user answered incorrectly
 function answerIncorrect() {
     console.log(`ran answerIncorrect`);
-    $('.answer').html(`<h2>Your answer is incorrect.</h2>
-    <img>
-    <p>The correct answer is: ${STORE[questionNumber].answer}</p>
+    let questionScore = $(`<ul class="nav"><li>Question: ${questionNumber + 1} / 7</li><li>Score: ${score}</li></ul>`);
+    $('.answer').html(`<h2>Your answer is incorrect.</h2><br><p>The correct answer is: ${STORE[questionNumber].answer}</p>
     <button type="button" id="next-button">Next</button>`);
+    $('.answer').prepend(questionScore);
 }
 
 // this function will run after user gets answerCorrect or answerIncorrect and pushes #next-button
